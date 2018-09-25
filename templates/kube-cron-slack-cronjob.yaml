@@ -22,4 +22,12 @@ spec:
                   secretKeyRef:
                     name: kube-cron-slack
                     key: SLACK_CHANNEL
+              - name: MY_NODE_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName
+              - name: MY_POD_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
           restartPolicy: Never
