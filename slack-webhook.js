@@ -1,5 +1,3 @@
-// https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
-
 var Slack = require('slack-node');
 var moment = require('moment-timezone');
 
@@ -12,8 +10,8 @@ var MY_POD_NAME = process.env.MY_POD_NAME || "NotReadFromEnv";
 var MY_TIME = moment().tz(TIME_ZONE).format();
 
 var message = "This CronJob was run on this shortlived pod: " + MY_POD_NAME +
-"At " + MY_TIME + "On Node: " + MY_NODE_NAME +
-"And Posted to: " + SLACK_CHANNEL;
+" At " + MY_TIME + " On Node: " + MY_NODE_NAME +
+" And Posted to: " + SLACK_CHANNEL;
 
 console.log("The SLACK_CHANNEL is set to: ", process.env.SLACK_CHANNEL);
 console.log("Message: " + message);

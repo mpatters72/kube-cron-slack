@@ -45,17 +45,29 @@ Verify
 kubectl get secret kube-cron-slack -o yaml
 ```
 
+## Setup CronJob
+
 ### Double-check settings in templates/kube-cron-slack-cronjob
 
 * e.g. do you really want this running every 2 minutes?
 
 * See: <https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/>
 
-* Copy template and make any desired edits and apply it
+* Also note we are exposing secret and pod info to pod: 
+* See: <https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/>
+
+### Copy template and make any desired edits and apply it
 
 ```bash
 cp templates/kube-cron-slack-cronjob.yaml /tmp
 # make any edits to /tmp/kube-cron-slack-cronjob.yaml
 # apply it
 kubectl apply -f /tmp/kube-cron-slack-cronjob.yaml
+```
+
+### Troubleshooting
+
+```bash
+kubectl get cronjob
+kubectl get jobs --watch
 ```
