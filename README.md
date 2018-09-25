@@ -4,19 +4,25 @@ Kubernetes Slack Notification Cron Job POC
 
 ## DockerHub Image
 
-<https://github.com/mpatters72/kube-cron-slack>
+<https://hub.docker.com/r/mpatters72/kube-cron-slack/>
+
+## Create a Slack Webhook URI
+
+<https://my.slack.com/services/new/incoming-webhook>
 
 ## Setup Secrets
 
 ### Copy Template
 
 ```bash
-cp templates/kube-cron-slack-secret.yaml secrets/
+cp templates/kube-cron-slack-secret.yaml /tmp/
 ```
 
 ### Get base64 encoded values
 
 <https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually>
+
+* Use the webhook URI you generated here and your desired slack channel
 
 ```bash
 echo -n 'https://hooks.slack.com/services/UseYour/RealChannel/URIHERE' | base64
@@ -27,14 +33,29 @@ I215LXNsYWNrLWNoYW5uZWw=
 
 ### Replace base64 files in new file secrets/kube-cron-slack-secret.yaml
 
-### Apply secret to kubernetes
+### Add secret to kubernetes
 
 ```bash
-kubectl apply -f secrets/kube-cron-slack-secret.yaml
+kubectl apply -f /tmp/kube-cron-slack-secret.yaml
 ```
 
-### Verify
+Verify
 
 ```bash
 kubectl get secret kube-cron-slack -o yaml
+```
+
+### Double-check settings in templates/kube-cron-slack-cronjob
+
+* e.g. do you really want this running every 2 minutes?
+
+* See: <https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/>
+
+* Copy template and make any desired edits and apply it
+
+```bash
+cp templates/kube-cron-slack-cronjob.yaml /tmp
+# make any edits to /tmp/kube-cron-slack-cronjob.yaml
+# apply it
+kubectl apply -f /tmp/kube-cron-slack-cronjob.yaml
 ```
