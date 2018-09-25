@@ -31,7 +31,7 @@ echo -n '#my-slack-channel' | base64
 I215LXNsYWNrLWNoYW5uZWw=
 ```
 
-### Replace base64 files in new file secrets/kube-cron-slack-secret.yaml
+### Replace base64 files in new file tmp/kube-cron-slack-secret.yaml
 
 ### Add secret to kubernetes
 
