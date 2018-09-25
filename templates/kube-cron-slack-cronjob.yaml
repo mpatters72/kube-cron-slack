@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: kube-cron-slack
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kube-cron-slack
+            image: mpatters72/kube-cron-slack
+            env:
+              - name: SLACK_WEBHOOK
+                valueFrom:
+                  secretKeyRef:
+                    name: kube-cron-slack
+                    key: SLACK_WEBHOOK
+              - name: SLACK_CHANNEL
+                valueFrom:
+                  secretKeyRef:
+                    name: kube-cron-slack
+                    key: SLACK_CHANNEL
+          restartPolicy: Never

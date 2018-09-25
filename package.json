@@ -1,0 +1,12 @@
+{
+  "name": "slack-webhook",
+  "description": "Slack Webhook POC",
+  "version": "0.0.1",
+  "dependencies": {
+    "slack-node": "*",
+    "moment-timezone": "*"
+  },
+  "scripts": {
+    "start": "node slack-webhook.js"
+  }
+}
